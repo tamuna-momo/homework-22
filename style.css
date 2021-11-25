@@ -1,0 +1,11 @@
+#canvas {
+    border: 1px solid #e3e3e3;
+}
+#start{
+    
+    top:50%;
+    left: 20%;
+}
+#countdown{
+    color: red;
+}
