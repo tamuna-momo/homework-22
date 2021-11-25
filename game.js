@@ -1,12 +1,16 @@
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
+const startGame=document.getElementById('startGame');
+var scoreIs=document.getElementById("score");
+var timer=document.getElementById('.timer');
 
-
+var score=0;
 
 
 const squareSize = 50;
 const targetSize = 20;
 const moveSpeed = 1;
+
 // let gameTime = 30;
 
 let squareX = 50;
@@ -19,24 +23,39 @@ let up = false;
 let down = false;
 let right = false;
 let left = false;
+ 
+
+  
 
 
+
+   startGame.addEventListener('click', e => {
+        canvas.style.display = 'block';
+        function startGame() {
+          moveTarget();
+          draw();
+          moveSquare();
+          score = 0;
+          
 var timeleft = 30;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Finished";
+    document.getElementById("timer").innerHTML = "Finished";
   } else {
-    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+    document.getElementById("timer").innerHTML = timeleft + " seconds remaining";
   }
   timeleft -= 1;
-}, 1000);
-
-function startGame() {
-  moveTarget();
-  draw();
-  moveSquare();
-  document.addEventListener('keydown', e => {
+  if (timer === 0){
+          clearInterval(interval);
+          document.getElementById('timer').innerHTML='0';
+          canvas.style.display = 'none';
+  }
+        
+ },1000)
+      
+   
+   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowUp') {
       up = true;
     }
@@ -70,6 +89,7 @@ function startGame() {
 }
 
 startGame();
+});
 
 function draw() {
   resetCanvas();
@@ -138,20 +158,4 @@ function isEaten(){
   return squareBottom > targetBottom && squareY < targetY && squareRight > targetRight && squareX < targetX;
 }
 
-var startgame = document.getElementById("startPause");
 
-startPause.addEventListener("click", Start);
-
-function Start(){
-    console.log("Started");
-    startPause.removeEventListener("click", Start);
-    startPause .addEventListener("click", Stop);
-    startPause.value = "Stop";
-}
-
-function Stop(){
-    console.log("Stopped");
-    startPause.removeEventListener("click", Stop);
-    startPause.addEventListener("click", Start);
-    startPause.value = "Start";
-}
