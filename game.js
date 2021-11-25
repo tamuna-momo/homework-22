@@ -45,7 +45,7 @@ var downloadTimer = setInterval(function(){
   } else {
     document.getElementById("timer").innerHTML = timeleft + " seconds remaining";
   }
-  timeleft -= 1;
+ 
   if (timer === 0){
           clearInterval(interval);
           document.getElementById('timer').innerHTML='0';
